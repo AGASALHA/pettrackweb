@@ -1,26 +1,69 @@
-
+import { FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '@/components/ui/button'
+import { Card } from '@/components/ui/card'
+import { Input } from '@/components/ui/input'
 
 export function Signup() {
+  const [name, setName] = useState('')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const navigate = useNavigate()
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault()
+
+    if (name && email && password) {
+      alert('Signup successful!')
+      navigate('/home')
+    }
+
+    return alert('Please fill in all fields')
+  }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-2xl font-bold mb-6 text-gray-800 text-center">Sign Up</h2>
-        <form>
+      <Card className="p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Name</label>
-            <input type="text" className="w-full p-3 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <Input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full mt-1"
+              required
+            />
           </div>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
-            <input type="email" className="w-full p-3 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <Input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full mt-1"
+              required
+            />
           </div>
           <div className="mb-6">
             <label className="block text-gray-700">Password</label>
-            <input type="password" className="w-full p-3 border rounded mt-1 focus:outline-none focus:ring-2 focus:ring-blue-500" />
+            <Input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full mt-1"
+              required
+            />
           </div>
-          <button className="w-full bg-blue-500 text-white p-3 rounded-lg hover:bg-blue-600 transition">Sign Up</button>
+          <Button
+            type="submit"
+            className="w-full bg-yellow-500 text-white hover:bg-yellow-600 transition"
+          >
+            Sign Up
+          </Button>
         </form>
-      </div>
+      </Card>
     </div>
   )
 }
