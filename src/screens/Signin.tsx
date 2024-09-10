@@ -36,7 +36,7 @@ export function Signin() {
             <h3 className="text-lg font-medium text-gray-900 leading-none mb-2.5">Sign In</h3>
             <div className="flex items-center justify-center font-medium">
               <span className="text-sm text-gray-700 me-1.5">
-                Precisa de uma conta?
+                Need an account?
               </span>
               <Link to="/signup" className="text-sm text-blue-500">Sign up</Link>
             </div>
