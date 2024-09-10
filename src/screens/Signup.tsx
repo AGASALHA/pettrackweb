@@ -1,5 +1,5 @@
 import { FormEvent, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -62,6 +62,10 @@ export function Signup() {
           >
             Sign Up
           </Button>
+          <p className="text-center text-gray-600 mt-4">
+            Já possui uma conta?{' '}
+            <Link to="/" className="text-blue-500 hover:underline">Sign in</Link>
+          </p>
         </form>
       </Card>
     </div>
