@@ -53,34 +53,58 @@ export function Signin() {
               Use Apple
             </a>
           </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700">Email</label>
+          <div className="flex items-center gap-2">
+            <span className="border-t border-gray-200 w-full">
+            </span>
+            <span className="text-xs text-gray-500 font-medium uppercase">
+              Or
+            </span>
+            <span className="border-t border-gray-200 w-full">
+            </span>
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-normal text-gray-900">Email</label>
             <Input
               type="email"
               value={email}
+              placeholder='email@emai.com'
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-1"
+              className="w-full mt-1 outline-none focus:outline-none focus:border-yellow-400 "
               required
             />
           </div>
-          <div className="mb-6">
-            <label className="block text-gray-700">Password</label>
-            <div className='input relative flex items-center justify-center'>
+          <div className="flex flex-col gap-1">
+            <div className="flex items-center justify-between gap-1">
+              <label className="text-sm font-normal text-gray-900">Password</label>
+              <Link to="/forgotPass" className="text-sm text-blue-500">Forgot password?</Link>
+            </div>
+            <div className='relative flex items-center justify-center'>
               <Input
                 type={showPassword ? 'text' : 'password'}
                 value={password}
+                placeholder='Enter Password'
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full mt-1"
+                className="w-full mt-1 outline-none focus:outline-none focus:border-yellow-400 "
                 required
               />
-              <span onClick={toggleShowPass} className='absolute right-3 mt-1'>
+              <span onClick={toggleShowPass} className='absolute right-3 mt-1 cursor-pointer'>
                 {
-                  showPassword ? <EyeSlash size={18} /> : <Eye size={18} />
+                  showPassword ? <EyeSlash size={18} color='#99a1b7' /> : <Eye size={18} color='#99a1b7' />
                 }
               </span>
             </div>
           </div>
+          <label className="flex w-full items-center justify-start gap-2">
+            <Input
+              className="rounded-md h-4 w-4"
+              name="check"
+              type="checkbox"
+              value="1"
+            />
+            <span className="text-sm">
+              Remember me
+            </span>
+          </label>
           <Button
             type="submit"
             className="w-full bg-yellow-400 text-white hover:bg-yellow-300 transition"
