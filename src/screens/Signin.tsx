@@ -16,12 +16,26 @@ export function Signin() {
   const navigate = useNavigate()
 
   async function handleSubmit(e: FormEvent) {
+
     e.preventDefault()
 
-    if (email !== 'antonio.alves@gmail.com') {
-      return alert('email or password incorrect')
-    }
-    navigate('/home')
+    await axios.post(`http://localhost:3333/sessions`, {
+      email,
+      password
+    }).then(res => {
+
+      console.log(`response do then`, res)
+
+      if (res.status === 200) {
+        navigate('/home')
+      }
+
+      if (res.status === 400) {
+        console.log(res.status)
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   function toggleShowPass() {
