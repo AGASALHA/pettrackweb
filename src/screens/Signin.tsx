@@ -29,7 +29,11 @@ export function Signin() {
       console.log(`response do then`, res)
 
       if (res.status === 200) {
-        navigate('/home')
+        navigate('/home', {
+          state: {
+            name: 'antonio'
+          }
+        })
       }
 
       if (res.status === 400) {

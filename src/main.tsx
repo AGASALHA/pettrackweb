@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/petinfo?petid=sdasdadsas-sdasdasd-dssads" element={<Home />} />
+        <Route path="/petinfo" element={<Home />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
