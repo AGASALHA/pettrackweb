@@ -6,6 +6,7 @@ import { FormEvent, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 import { Eye, EyeSlash } from "@phosphor-icons/react"
+import { api } from '@/services/api'
 
 export function Signup() {
 
@@ -16,17 +17,48 @@ export function Signup() {
   const [passwordConfirmed, setPasswordConfirmed] = useState('')
   const [showPasswordConfirmed, setShowPasswordConfirmed] = useState(false)
 
+  const [cpfCnpj, setCpfCnpj] = useState('')
+  const [cep, setCep] = useState('')
+
   const navigate = useNavigate()
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
 
-    if (name && email && password) {
-      alert('Signup successful!')
-      navigate('/home')
+    const data = {
+      name,
+      cpf_cnpj: cpfCnpj,
+      cep,
+      email,
+      password
     }
 
-    return alert('Please fill in all fields')
+    if (!validateSamePassword(password, passwordConfirmed)) {
+      return alert('The confirmed password is not the same password')
+    }
+
+    await api.post(`/users`, data)
+      .then(res => {
+
+        console.log(`response do then`, res)
+
+        if (res.status === 201) {
+          console.log('usuario cadastrado', res)
+          // show some toastmessage before redirect to singin
+          navigate('/')
+        }
+
+        if (res.status === 400) {
+          console.log(res.status)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+
+  }
+
+  function validateSamePassword(password: string, confirmPassword: string) {
+    return password === confirmPassword
   }
 
   function toggleShowPass() {
@@ -79,6 +111,30 @@ export function Signup() {
               onChange={(e) => setName(e.target.value)}
               className="w-full mt-1 outline-none focus:outline-none focus:border-yellow-400 "
               required
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-normal text-gray-900" htmlFor="cpfCnpj">CPF or CNPJ</label>
+            <Input
+              type="text"
+              value={cpfCnpj}
+              placeholder='Enter your CPF or CNPJ'
+              onChange={(e) => setCpfCnpj(e.target.value)}
+              className="w-full mt-1 outline-none focus:outline-none focus:border-yellow-400 "
+              required
+              id='cpfCnpj'
+            />
+          </div>
+          <div className="flex flex-col gap-1">
+            <label className="text-sm font-normal text-gray-900" htmlFor="cep">ZIP CODE</label>
+            <Input
+              type="text"
+              value={cep}
+              placeholder='Enter your CEP'
+              onChange={(e) => setCep(e.target.value)}
+              className="w-full mt-1 outline-none focus:outline-none focus:border-yellow-400 "
+              required
+              id='cep'
             />
           </div>
           <div className="flex flex-col gap-1">

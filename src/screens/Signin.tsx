@@ -21,7 +21,7 @@ export function Signin() {
 
     e.preventDefault()
 
-    await api.post(`http://localhost:3333/sessions`, {
+    await api.post(`/sessions`, {
       email,
       password
     }).then(res => {
