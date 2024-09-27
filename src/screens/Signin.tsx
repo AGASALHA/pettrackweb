@@ -7,6 +7,8 @@ import { useNavigate, Link } from 'react-router-dom'
 
 import { Eye, EyeSlash } from "@phosphor-icons/react"
 
+import { api } from '@/services/api'
+
 export function Signin() {
 
   const [email, setEmail] = useState('')
@@ -19,7 +21,7 @@ export function Signin() {
 
     e.preventDefault()
 
-    await axios.post(`http://localhost:3333/sessions`, {
+    await api.post(`http://localhost:3333/sessions`, {
       email,
       password
     }).then(res => {
