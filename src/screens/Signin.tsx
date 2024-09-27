@@ -29,9 +29,12 @@ export function Signin() {
       console.log(`response do then`, res)
 
       if (res.status === 200) {
+
+        const user = res.data?.user
+
         navigate('/home', {
           state: {
-            name: 'antonio'
+            user
           }
         })
       }
