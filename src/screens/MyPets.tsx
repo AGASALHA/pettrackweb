@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom"
+
 import {
   File,
   Home,
@@ -60,11 +61,13 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 
 export const description =
   "An products dashboard with a sidebar navigation. The sidebar has icon navigation. The content area has a breadcrumb and search in the header. It displays a list of products in a table with actions."
 
 export function MyPets() {
+
   return (
     <div className="flex min-h-screen w-full flex-col bg-muted/40">
       <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
@@ -169,7 +172,10 @@ export function MyPets() {
                 size="icon"
                 className="overflow-hidden rounded-full"
               >
-                <span>UserLogoHere</span>
+                <Avatar>
+                  <AvatarImage src="https://github.com/antoniojpsalves.png" alt="@antoniojpsalves" />
+                  <AvatarFallback>Antonio Alves</AvatarFallback>
+                </Avatar>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
@@ -187,9 +193,9 @@ export function MyPets() {
             <div className="flex items-center">
               <TabsList>
                 <TabsTrigger value="all">All</TabsTrigger>
-                <TabsTrigger value="active">Active</TabsTrigger>
-                <TabsTrigger value="archived" className="hidden sm:flex">
-                  Archived
+                <TabsTrigger value="safe">Safe</TabsTrigger>
+                <TabsTrigger value="lost" className="hidden sm:flex">
+                  Lost
                 </TabsTrigger>
               </TabsList>
               <div className="ml-auto flex items-center gap-2">
@@ -206,10 +212,10 @@ export function MyPets() {
                     <DropdownMenuLabel>Filter by</DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuCheckboxItem checked>
-                      Active
+                      Safe
                     </DropdownMenuCheckboxItem>
                     <DropdownMenuCheckboxItem>
-                      Archived
+                      Lost
                     </DropdownMenuCheckboxItem>
                   </DropdownMenuContent>
                 </DropdownMenu>
@@ -274,7 +280,7 @@ export function MyPets() {
                           Meow
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">Active</Badge>
+                          <Badge variant="outline">Safe</Badge>
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                           Abyssinian
@@ -302,7 +308,9 @@ export function MyPets() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Link to={`/petInfo?petId=0dcb32e5-f241-476e-8c14-3c62779f806c`}>View</Link>
+                              </DropdownMenuItem>
                               <DropdownMenuItem>Delete</DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
@@ -320,7 +328,7 @@ export function MyPets() {
                           Charlie
                         </TableCell>
                         <TableCell>
-                          <Badge variant="outline">Active</Badge>
+                          <Badge variant="outline">Safe</Badge>
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                           vira-lata
@@ -348,7 +356,9 @@ export function MyPets() {
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem>Edit</DropdownMenuItem>
+                              <DropdownMenuItem>
+                                <Link to={`/petInfo?petId=4b90f45d-6ff5-42b9-a129-64e5ceac8c27`}>View</Link>
+                              </DropdownMenuItem>
                               <DropdownMenuItem>Delete</DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
