@@ -74,7 +74,7 @@ export function MyPets() {
               <TooltipTrigger asChild>
                 <Link
                   to="/home"
-                  className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+                  className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground transition-colors hover:text-foreground hover:bg-accent md:h-8 md:w-8"
                 >
                   <Home className="h-5 w-5" />
                   <span className="sr-only">Dashboard</span>
@@ -86,7 +86,7 @@ export function MyPets() {
               <TooltipTrigger asChild>
                 <Link
                   to="/myPets"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg bg-accent text-accent-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
                   <PawPrint className="h-5 w-5" />
                   <span className="sr-only">Pets</span>
