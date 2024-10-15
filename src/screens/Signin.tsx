@@ -1,11 +1,15 @@
+import { FormEvent, useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
-import { FormEvent, useState } from 'react'
-
-import { useNavigate, Link } from 'react-router-dom'
 
 import { Eye, EyeSlash } from "@phosphor-icons/react"
+
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css';
+
+import { useNavigate, Link } from 'react-router-dom'
 
 import { api } from '@/services/api'
 
@@ -26,24 +30,32 @@ export function Signin() {
       password
     }).then(res => {
 
-      console.log(`response do then`, res)
-
+      // console.log(`response do then`, res)
       if (res.status === 200) {
 
         const user = res.data?.user
 
-        navigate('/home', {
-          state: {
-            user
+        toast('Authenticated !', {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+          onClose: () => {
+            navigate('/home', {
+              state: {
+                user
+              }
+            })
           }
         })
       }
-
-      if (res.status === 400) {
-        console.log(res.status)
-      }
     }).catch(err => {
       console.log(err)
+      toast.error(err)
     })
   }
 
@@ -53,6 +65,19 @@ export function Signin() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 bg-[url('assets/img/bg.png')] bg-cover bg-center">
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
       <Card className="rounded-lg shadow-lg max-w-[370px] w-full">
         <form onSubmit={handleSubmit} className="card-body flex flex-col gap-5 p-10">
           <div className="text-center mb-2.5">
