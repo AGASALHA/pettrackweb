@@ -8,6 +8,7 @@ import { Signup } from './screens/Signup.tsx'
 import { TrackPetHome } from './screens/TrackPetHome.tsx'
 
 import './index.css'
+import { MyPets } from './screens/MyPets.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path='/' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/home" element={<TrackPetHome />} />
+        <Route path="/myPets" element={<MyPets />} />
         <Route path="/petinfo" element={<></>} />
       </Routes>
     </BrowserRouter>
