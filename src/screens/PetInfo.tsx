@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import {
   ChevronLeft,
   Home,
@@ -7,10 +7,10 @@ import {
   Package2,
   PanelLeft,
   PawPrint,
-  PlusCircle,
   Search,
   Settings,
   ShoppingCart,
+  TriangleAlert,
   Upload,
   Users2,
 } from "lucide-react"
@@ -29,7 +29,6 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -76,14 +75,35 @@ import { useEffect, useState } from "react"
 
 
 import { useSearchParams } from 'react-router-dom'
+// import { UserContext } from "@/Context/userContext"
 
 export const description = "test pet info page"
 
+
+interface petsDataProps {
+  id: string
+  name: string
+  resume: string
+  status: string
+  color: string
+  breed: string
+  gender: string
+  size: string
+}
+
 export function PetInfo() {
+
+  const navigate = useNavigate()
+
+  // const { user } = useContext(UserContext)
 
   const [searchParams] = useSearchParams()
 
-  const data = [
+  const [currentStatus, setCurrentStatus] = useState('safe')
+
+  const [inputBlocked, setInputBlocked] = useState(false)
+
+  const [data, setData] = useState<petsDataProps[]>([
     {
       id: "0dcb32e5-f241-476e-8c14-3c62779f806c",
       name: "Meow",
@@ -104,9 +124,9 @@ export function PetInfo() {
       gender: "male",
       size: "m"
     }
-  ]
+  ])
 
-  const [currentPet, setCurrentPet] = useState({})
+  const [currentPet, setCurrentPet] = useState<petsDataProps>({} as petsDataProps)
 
   useEffect(() => {
     const petId = searchParams.get('petId'); // Obtém o valor de 'petId' do query param
@@ -119,22 +139,43 @@ export function PetInfo() {
         setCurrentPet(selectedPet); // Atualiza o estado com o objeto correspondente
       }
 
-      console.log(currentPet)
+      // console.log(currentPet)
     }
-  }, [searchParams]);
+  }, [searchParams, currentPet, data]);
+
+
+  function defineLostPetLost() {
+
+    const newState = data.map(pet => {
+      if (pet.id === currentPet.id) {
+        pet.status = currentStatus
+      }
+      return pet
+    })
+
+    if (currentStatus === 'lost') {
+      setInputBlocked(true)
+    }
+
+    if (currentStatus === 'safe') {
+      setInputBlocked(false)
+    }
+
+    setData(newState)
+  }
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+    <div className="flex flex-col w-full min-h-screen bg-muted/40">
+      <aside className="fixed inset-y-0 left-0 z-10 flex-col hidden border-r w-14 bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-5">
           <TooltipProvider delayDuration={800} skipDelayDuration={500}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   to="/home"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground transition-colors hover:text-foreground hover:bg-accent md:h-8 md:w-8"
+                  className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-accent-foreground hover:text-foreground hover:bg-accent md:h-8 md:w-8"
                 >
-                  <Home className="h-5 w-5" />
+                  <Home className="w-5 h-5" />
                   <span className="sr-only">Dashboard</span>
                 </Link>
               </TooltipTrigger>
@@ -144,9 +185,9 @@ export function PetInfo() {
               <TooltipTrigger asChild>
                 <Link
                   to="/myPets"
-                  className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+                  className="flex items-center justify-center gap-2 text-lg font-semibold rounded-full group h-9 w-9 shrink-0 bg-primary text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
-                  <PawPrint className="h-5 w-5" />
+                  <PawPrint className="w-5 h-5" />
                   <span className="sr-only">Pets</span>
                 </Link>
               </TooltipTrigger>
@@ -154,15 +195,15 @@ export function PetInfo() {
             </Tooltip>
           </TooltipProvider>
         </nav>
-        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+        <nav className="flex flex-col items-center gap-4 px-2 mt-auto sm:py-5">
           <TooltipProvider delayDuration={800} skipDelayDuration={500}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   to="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8"
                 >
-                  <Settings className="h-5 w-5" />
+                  <Settings className="w-5 h-5" />
                   <span className="sr-only">Settings</span>
                 </Link>
               </TooltipTrigger>
@@ -172,11 +213,11 @@ export function PetInfo() {
         </nav>
       </aside>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <header className="sticky top-0 z-30 flex items-center gap-4 px-4 border-b h-14 bg-background sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
+                <PanelLeft className="w-5 h-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -184,44 +225,44 @@ export function PetInfo() {
               <nav className="grid gap-6 text-lg font-medium">
                 <Link
                   to="#"
-                  className="group flex h-10 w-10 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:text-base"
+                  className="flex items-center justify-center w-10 h-10 gap-2 text-lg font-semibold rounded-full group shrink-0 bg-primary text-primary-foreground md:text-base"
                 >
-                  <Package2 className="h-5 w-5 transition-all group-hover:scale-110" />
+                  <Package2 className="w-5 h-5 transition-all group-hover:scale-110" />
                   <span className="sr-only">Acme Inc</span>
                 </Link>
                 <Link
                   to="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Home className="h-5 w-5" />
+                  <Home className="w-5 h-5" />
                   Dashboard
                 </Link>
                 <Link
                   to="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <ShoppingCart className="h-5 w-5" />
+                  <ShoppingCart className="w-5 h-5" />
                   Orders
                 </Link>
                 <Link
                   to="#"
                   className="flex items-center gap-4 px-2.5 text-foreground"
                 >
-                  <Package className="h-5 w-5" />
+                  <Package className="w-5 h-5" />
                   Products
                 </Link>
                 <Link
                   to="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Users2 className="h-5 w-5" />
+                  <Users2 className="w-5 h-5" />
                   Customers
                 </Link>
                 <Link
                   to="#"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <LineChart className="h-5 w-5" />
+                  <LineChart className="w-5 h-5" />
                   Settings
                 </Link>
               </nav>
@@ -246,7 +287,7 @@ export function PetInfo() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="relative ml-auto flex-1 md:grow-0">
+          <div className="relative flex-1 ml-auto md:grow-0">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
@@ -273,32 +314,39 @@ export function PetInfo() {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => navigate('/')}>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+        <main className="grid items-start flex-1 gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <div className="mx-auto grid max-w-[59rem] flex-1 auto-rows-max gap-4">
             <div className="flex items-center gap-4">
               <Button variant="outline" size="icon" className="h-7 w-7">
-                <ChevronLeft className="h-4 w-4" />
+                <ChevronLeft className="w-4 h-4" />
                 <span className="sr-only">Back</span>
               </Button>
-              <h1 className="flex-1 shrink-0 whitespace-nowrap text-xl font-semibold tracking-tight sm:grow-0">
+              <h1 className="flex-1 text-xl font-semibold tracking-tight shrink-0 whitespace-nowrap sm:grow-0">
                 {currentPet.name}
               </h1>
-              <Badge variant="outline" className="ml-auto sm:ml-0">
+              <Badge
+                variant="outline"
+                className={
+                  `flex justify-center ml-auto sm:ml-0 item-center ${currentPet.status === 'lost' ? 'bg-red-600 text-white' : ''
+                  }`
+                }
+              >
                 {currentPet.status}
+                {currentPet.status === 'lost' && <TriangleAlert className="w-4 h-4 ml-2 font-bold text-white animate-pulse" />}
               </Badge>
-              <div className="hidden items-center gap-2 md:ml-auto md:flex">
+              <div className="items-center hidden gap-2 md:ml-auto md:flex">
                 <Button variant="outline" size="sm">
                   Discard
                 </Button>
-                <Button size="sm">Save Changes</Button>
+                <Button size="sm" onClick={defineLostPetLost}>Save Changes</Button>
               </div>
             </div>
             <div className="grid gap-4 md:grid-cols-[1fr_250px] lg:grid-cols-3 lg:gap-8">
-              <div className="grid auto-rows-max items-start gap-4 lg:col-span-2 lg:gap-8">
+              <div className="grid items-start gap-4 auto-rows-max lg:col-span-2 lg:gap-8">
                 <Card x-chunk="dashboard-07-chunk-0">
                   <CardHeader>
                     <CardTitle>Pet Details</CardTitle>
@@ -315,6 +363,7 @@ export function PetInfo() {
                           type="text"
                           className="w-full"
                           defaultValue={currentPet.name}
+                          disabled={inputBlocked}
                         />
                       </div>
                       <div className="grid gap-3">
@@ -323,6 +372,7 @@ export function PetInfo() {
                           id="description"
                           defaultValue={currentPet.resume}
                           className="min-h-32"
+                          disabled={inputBlocked}
                         />
                       </div>
                     </div>
@@ -358,6 +408,7 @@ export function PetInfo() {
                               id="stock-1"
                               type="text"
                               defaultValue={currentPet.gender}
+                              disabled={inputBlocked}
                             />
                           </TableCell>
                           <TableCell>
@@ -368,6 +419,7 @@ export function PetInfo() {
                               id="price-1"
                               type="number"
                               defaultValue="14"
+                              disabled={inputBlocked}
                             />
                           </TableCell>
                           <TableCell>
@@ -375,6 +427,7 @@ export function PetInfo() {
                               type="single"
                               defaultValue={currentPet.size ?? 's'}
                               variant="outline"
+                              disabled={inputBlocked}
                             >
                               <ToggleGroupItem value="s">S</ToggleGroupItem>
                               <ToggleGroupItem value="m">M</ToggleGroupItem>
@@ -387,7 +440,9 @@ export function PetInfo() {
                   </CardContent>
                 </Card>
               </div>
-              <div className="grid auto-rows-max items-start gap-4 lg:gap-8">
+              <div className={`grid items-start gap-4 auto-rows-max lg:gap-8
+                  ${inputBlocked ? 'cursor-not-allowed' : ''}
+                `}>
                 <Card x-chunk="dashboard-07-chunk-3">
                   <CardHeader>
                     <CardTitle>Product Status</CardTitle>
@@ -396,13 +451,13 @@ export function PetInfo() {
                     <div className="grid gap-6">
                       <div className="grid gap-3">
                         <Label htmlFor="status">Status</Label>
-                        <Select defaultValue={currentPet.status}>
+                        <Select defaultValue={currentPet.status} onValueChange={e => setCurrentStatus(e)}>
                           <SelectTrigger id="status" aria-label="Select status">
                             <SelectValue placeholder="Select status" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="safe">Safe</SelectItem>
-                            <SelectItem value="Lost">Lost</SelectItem>
+                            <SelectItem value="lost">Lost</SelectItem>
                             <SelectItem value="archived">Archived</SelectItem>
                           </SelectContent>
                         </Select>
@@ -424,31 +479,17 @@ export function PetInfo() {
                       <QrCodeImg source={`http://localhost:5173/petInfo?petId=${currentPet.id}`} />
                       <div className="grid grid-cols-3 gap-2">
                         <button>
-                          <span className="aspect-square w-full rounded-md object-cover h-20"> img here </span>
+                          <span className="object-cover w-full h-20 rounded-md aspect-square"> img here </span>
                         </button>
                         <button>
-                          <span className="aspect-square w-full rounded-md object-cover h-20"> img here </span>
+                          <span className="object-cover w-full h-20 rounded-md aspect-square"> img here </span>
                         </button>
-                        <button className="flex aspect-square w-full items-center justify-center rounded-md border border-dashed">
-                          <Upload className="h-4 w-4 text-muted-foreground" />
+                        <button className="flex items-center justify-center w-full border border-dashed rounded-md aspect-square">
+                          <Upload className="w-4 h-4 text-muted-foreground" />
                           <span className="sr-only">Upload</span>
                         </button>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
-                <Card x-chunk="dashboard-07-chunk-5">
-                  <CardHeader>
-                    <CardTitle>Archive Product</CardTitle>
-                    <CardDescription>
-                      Lipsum dolor sit amet, consectetur adipiscing elit.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div></div>
-                    <Button size="sm" variant="secondary">
-                      Archive Product
-                    </Button>
                   </CardContent>
                 </Card>
               </div>
