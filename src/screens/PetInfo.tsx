@@ -445,7 +445,7 @@ export function PetInfo() {
                 `}>
                 <Card x-chunk="dashboard-07-chunk-3">
                   <CardHeader>
-                    <CardTitle>Product Status</CardTitle>
+                    <CardTitle>Pet Status</CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="grid gap-6">
@@ -469,9 +469,9 @@ export function PetInfo() {
                   className="overflow-hidden" x-chunk="dashboard-07-chunk-4"
                 >
                   <CardHeader>
-                    <CardTitle>Product Images</CardTitle>
+                    <CardTitle>QR Code of your pet</CardTitle>
                     <CardDescription>
-                      Lipsum dolor sit amet, consectetur adipiscing elit
+                      This is the current Strap
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
@@ -486,7 +486,7 @@ export function PetInfo() {
                         </button>
                         <button className="flex items-center justify-center w-full border border-dashed rounded-md aspect-square">
                           <Upload className="w-4 h-4 text-muted-foreground" />
-                          <span className="sr-only">Upload</span>
+                          <span className="sr-only">Upload new pic of your pet</span>
                         </button>
                       </div>
                     </div>
