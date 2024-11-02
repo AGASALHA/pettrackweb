@@ -226,7 +226,7 @@ export function TrackPetHome() {
                 className="overflow-hidden rounded-full"
               >
                 <Avatar>
-                  <AvatarImage src="https://github.com/antoniojpsalves.png" alt="@antoniojpsalves" />
+                  <AvatarImage src="https://github.com/Soepaza.png" alt="@antoniojpsalves" />
                   <AvatarFallback>{user.name}</AvatarFallback>
                 </Avatar>
               </Button>

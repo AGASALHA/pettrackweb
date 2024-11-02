@@ -69,17 +69,17 @@ export const description =
 export function MyPets() {
 
   return (
-    <div className="flex min-h-screen w-full flex-col bg-muted/40">
-      <aside className="fixed inset-y-0 left-0 z-10 hidden w-14 flex-col border-r bg-background sm:flex">
+    <div className="flex flex-col w-full min-h-screen bg-muted/40">
+      <aside className="fixed inset-y-0 left-0 z-10 flex-col hidden border-r w-14 bg-background sm:flex">
         <nav className="flex flex-col items-center gap-4 px-2 sm:py-4">
           <TooltipProvider delayDuration={800} skipDelayDuration={500}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   to="/home"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-accent-foreground transition-colors hover:text-foreground hover:bg-accent md:h-8 md:w-8"
+                  className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-accent-foreground hover:text-foreground hover:bg-accent md:h-8 md:w-8"
                 >
-                  <Home className="h-5 w-5" />
+                  <Home className="w-5 h-5" />
                   <span className="sr-only">Dashboard</span>
                 </Link>
               </TooltipTrigger>
@@ -89,9 +89,9 @@ export function MyPets() {
               <TooltipTrigger asChild>
                 <Link
                   to="/myPets"
-                  className="group flex h-9 w-9 shrink-0 items-center justify-center gap-2 rounded-full bg-primary text-lg font-semibold text-primary-foreground md:h-8 md:w-8 md:text-base"
+                  className="flex items-center justify-center gap-2 text-lg font-semibold rounded-full group h-9 w-9 shrink-0 bg-primary text-primary-foreground md:h-8 md:w-8 md:text-base"
                 >
-                  <PawPrint className="h-5 w-5" />
+                  <PawPrint className="w-5 h-5" />
                   <span className="sr-only">Pets</span>
                 </Link>
               </TooltipTrigger>
@@ -99,15 +99,15 @@ export function MyPets() {
             </Tooltip>
           </TooltipProvider>
         </nav>
-        <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-4">
+        <nav className="flex flex-col items-center gap-4 px-2 mt-auto sm:py-4">
           <TooltipProvider delayDuration={800} skipDelayDuration={500}>
             <Tooltip>
               <TooltipTrigger asChild>
                 <Link
                   to="#"
-                  className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+                  className="flex items-center justify-center transition-colors rounded-lg h-9 w-9 text-muted-foreground hover:text-foreground md:h-8 md:w-8"
                 >
-                  <Settings className="h-5 w-5" />
+                  <Settings className="w-5 h-5" />
                   <span className="sr-only">Settings</span>
                 </Link>
               </TooltipTrigger>
@@ -117,11 +117,11 @@ export function MyPets() {
         </nav>
       </aside>
       <div className="flex flex-col sm:gap-4 sm:py-4 sm:pl-14">
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+        <header className="sticky top-0 z-30 flex items-center gap-4 px-4 border-b h-14 bg-background sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
           <Sheet>
             <SheetTrigger asChild>
               <Button size="icon" variant="outline" className="sm:hidden">
-                <PanelLeft className="h-5 w-5" />
+                <PanelLeft className="w-5 h-5" />
                 <span className="sr-only">Toggle Menu</span>
               </Button>
             </SheetTrigger>
@@ -131,14 +131,14 @@ export function MyPets() {
                   to="/home"
                   className="flex items-center gap-4 px-2.5 text-muted-foreground hover:text-foreground"
                 >
-                  <Home className="h-5 w-5" />
+                  <Home className="w-5 h-5" />
                   Dashboard
                 </Link>
                 <Link
                   to="/myPets"
                   className="flex items-center gap-4 px-2.5 text-foreground"
                 >
-                  <PawPrint className="h-5 w-5" />
+                  <PawPrint className="w-5 h-5" />
                   Pets
                 </Link>
               </nav>
@@ -157,7 +157,7 @@ export function MyPets() {
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
-          <div className="relative ml-auto flex-1 md:grow-0">
+          <div className="relative flex-1 ml-auto md:grow-0">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
               type="search"
@@ -173,7 +173,7 @@ export function MyPets() {
                 className="overflow-hidden rounded-full"
               >
                 <Avatar>
-                  <AvatarImage src="https://github.com/antoniojpsalves.png" alt="@antoniojpsalves" />
+                  <AvatarImage src="https://github.com/Soepaza.png" alt="@antoniojpsalves" />
                   <AvatarFallback>Antonio Alves</AvatarFallback>
                 </Avatar>
               </Button>
@@ -188,7 +188,7 @@ export function MyPets() {
             </DropdownMenuContent>
           </DropdownMenu>
         </header>
-        <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
+        <main className="grid items-start flex-1 gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
           <Tabs defaultValue="all">
             <div className="flex items-center">
               <TabsList>
@@ -198,7 +198,7 @@ export function MyPets() {
                   Lost
                 </TabsTrigger>
               </TabsList>
-              <div className="ml-auto flex items-center gap-2">
+              <div className="flex items-center gap-2 ml-auto">
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button variant="outline" size="sm" className="h-8 gap-1">
@@ -271,7 +271,7 @@ export function MyPets() {
                       <TableRow>
                         <TableCell className="hidden sm:table-cell">
                           <img
-                            className="aspect-square rounded-md object-cover"
+                            className="object-cover rounded-md aspect-square"
                             src="https://images.unsplash.com/photo-1625665464963-74d0d30c648f?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             alt="Meow photo"
                           />
@@ -302,7 +302,7 @@ export function MyPets() {
                                 size="icon"
                                 variant="ghost"
                               >
-                                <MoreHorizontal className="h-4 w-4" />
+                                <MoreHorizontal className="w-4 h-4" />
                                 <span className="sr-only">Toggle menu</span>
                               </Button>
                             </DropdownMenuTrigger>
@@ -319,7 +319,7 @@ export function MyPets() {
                       <TableRow>
                         <TableCell className="hidden sm:table-cell">
                           <img
-                            className="aspect-square rounded-md object-cover"
+                            className="object-cover rounded-md aspect-square"
                             src="https://images.unsplash.com/photo-1682073177089-9526a4758455?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             alt="Charlie photo"
                           />
@@ -350,7 +350,7 @@ export function MyPets() {
                                 size="icon"
                                 variant="ghost"
                               >
-                                <MoreHorizontal className="h-4 w-4" />
+                                <MoreHorizontal className="w-4 h-4" />
                                 <span className="sr-only">Toggle menu</span>
                               </Button>
                             </DropdownMenuTrigger>

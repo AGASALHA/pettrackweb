@@ -303,7 +303,7 @@ export function PetInfo() {
                 className="overflow-hidden rounded-full"
               >
                 <Avatar>
-                  <AvatarImage src="https://github.com/antoniojpsalves.png" alt="@antoniojpsalves" />
+                  <AvatarImage src="https://github.com/Soepaza.png" alt="@antoniojpsalves" />
                   <AvatarFallback>Antonio Alves</AvatarFallback>
                 </Avatar>
               </Button>
@@ -471,7 +471,7 @@ export function PetInfo() {
                   <CardHeader>
                     <CardTitle>QR Code of your pet</CardTitle>
                     <CardDescription>
-                      This is the current Strap
+                      This was made by the current Strap
                     </CardDescription>
                   </CardHeader>
                   <CardContent>
