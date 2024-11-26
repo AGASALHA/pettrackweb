@@ -42,7 +42,7 @@ export function PetsMonitor() {
   return (
     <Card className="col-span-4">
       <CardHeader>
-        <CardTitle>Overview of all pets</CardTitle>
+        <CardTitle>Overview of all pets by locale</CardTitle>
         <CardDescription>Current year 2024</CardDescription>
       </CardHeader>
       <CardContent>

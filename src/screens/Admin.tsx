@@ -25,6 +25,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
@@ -56,7 +57,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { UserContext } from '@/Context/userContext'
 import { useContext } from 'react'
 import { Overview } from '@/components/dashboardcomponents/overview'
-import { PieChartComponent } from '@/components/dashboardcomponents/piechart'
+import { UserByLocale } from '@/components/dashboardcomponents/piechart'
 import { CalendarDateRangePicker } from '@/components/dashboardcomponents/date-range-picker'
 import { FirstAidKit, SecurityCamera, Users } from '@phosphor-icons/react'
 import { PetsMonitor } from '@/components/dashboardcomponents/multiple-chart'
@@ -332,13 +333,14 @@ export function Admin() {
                   <Card className="col-span-4">
                     <CardHeader>
                       <CardTitle>Overview</CardTitle>
+                      <CardDescription>July - Dec 2024</CardDescription>
                     </CardHeader>
                     <CardContent className="pl-2">
                       <Overview />
                     </CardContent>
                   </Card>
 
-                  <PieChartComponent />
+                  <UserByLocale />
 
                 </div>
               </TabsContent>

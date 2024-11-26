@@ -22,40 +22,45 @@ import {
 } from "@/components/ui/chart"
 
 const chartData = [
-  { browser: "chrome", visitors: 275, fill: "var(--color-chrome)" },
-  { browser: "safari", visitors: 200, fill: "var(--color-safari)" },
-  { browser: "firefox", visitors: 287, fill: "var(--color-firefox)" },
-  { browser: "edge", visitors: 173, fill: "var(--color-edge)" },
-  { browser: "other", visitors: 190, fill: "var(--color-other)" },
+  { browser: "north", visitors: 145, fill: "hsl(var(--chart-1))" },
+  { browser: "northeast", visitors: 182, fill: "hsl(var(--chart-2))" },
+  { browser: "south", visitors: 137, fill: "hsl(var(--chart-3))" },
+  { browser: "southeast", visitors: 173, fill: "hsl(var(--chart-4))" },
+  { browser: "center", visitors: 185, fill: "hsl(var(--chart-5))" },
+  { browser: "centerwest", visitors: 303, fill: "hsl(var(--chart-6))" },
 ]
-
 const chartConfig = {
-  visitors: {
-    label: "Visitors",
+  users: {
+    label: "Users",
   },
-  chrome: {
-    label: "Chrome",
+  north: {
+    label: "North",
     color: "hsl(var(--chart-1))",
   },
-  safari: {
-    label: "Safari",
+  northeast: {
+    label: "Northeast",
     color: "hsl(var(--chart-2))",
   },
-  firefox: {
-    label: "Firefox",
-    color: "hsl(var(--chart-3))",
+  south: {
+    label: 'South',
+    color: 'hsl(var(--chart-3))',
   },
-  edge: {
-    label: "Edge",
+  southeast: {
+    label: "Southeast",
     color: "hsl(var(--chart-4))",
   },
-  other: {
-    label: "Other",
+  center: {
+    label: "Center",
     color: "hsl(var(--chart-5))",
   },
+  centerwest: {
+    label: "Centerwest",
+    color: "hsl(var(--chart-6))",
+  },
+
 } satisfies ChartConfig
 
-export function PieChartComponent() {
+export function UserByLocale() {
   const totalVisitors = React.useMemo(() => {
     return chartData.reduce((acc, curr) => acc + curr.visitors, 0)
   }, [])
@@ -63,8 +68,8 @@ export function PieChartComponent() {
   return (
     <Card className="flex flex-col col-span-3">
       <CardHeader className="items-center pb-0">
-        <CardTitle>Pie Chart - Donut with Text</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle>Users by Locale - BRA</CardTitle>
+        <CardDescription>July - Dec 2024</CardDescription>
       </CardHeader>
       <CardContent className="flex-1 pb-0">
         <ChartContainer
@@ -105,7 +110,7 @@ export function PieChartComponent() {
                           y={(viewBox.cy || 0) + 24}
                           className="fill-muted-foreground"
                         >
-                          Visitors
+                          Users
                         </tspan>
                       </text>
                     )
@@ -118,10 +123,10 @@ export function PieChartComponent() {
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
         <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="w-4 h-4" />
+          Trending up by 10.1% this month <TrendingUp className="w-4 h-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total users active for the last 6 months
         </div>
       </CardFooter>
     </Card>
