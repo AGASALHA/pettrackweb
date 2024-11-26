@@ -53,6 +53,16 @@ export function Signin() {
 
             //atualizar usuario logado
             defineUserSession(user)
+
+            console.log('user admin? ', user.admin)
+
+            if (user.admin) {
+              return navigate('/admin', {
+                state: {
+                  user
+                }
+              })
+            }
             navigate('/home', {
               state: {
                 user

@@ -16,6 +16,7 @@ interface user {
   name: string
   password_hash: string
   updated_at: string
+  admin: boolean
 }
 
 interface UserContextProps {
@@ -27,8 +28,8 @@ export function UserContextProvider({ children }: UserContextProviderProps) {
 
   const [user, setUser] = useState<user>({} as user)
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  function defineUserSession(authUser: any) {
+
+  function defineUserSession(authUser: user) {
     setUser(authUser)
   }
 

@@ -11,6 +11,7 @@ import './index.css'
 import { MyPets } from './screens/MyPets.tsx'
 import { PetInfo } from './screens/PetInfo.tsx'
 import { UserContextProvider } from './Context/userContext.tsx'
+import { Admin } from './screens/Admin.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path="/home" element={<TrackPetHome />} />
           <Route path="/myPets" element={<MyPets />} />
           <Route path="/petInfo" element={<PetInfo />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </BrowserRouter>
     </UserContextProvider>

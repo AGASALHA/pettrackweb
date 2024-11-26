@@ -81,6 +81,7 @@ import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from 'react-router-dom'
 import { UserContext } from "@/Context/userContext"
 import { Separator } from "@/components/ui/separator"
+import { toast, ToastContainer } from "react-toastify"
 // import { UserContext } from "@/Context/userContext"
 
 export const description = "test pet info page"
@@ -109,7 +110,7 @@ export function PetInfo() {
 
   const { user } = useContext(UserContext)
 
-  console.log(user.id)
+  // console.log(user.id)
 
   const [searchParams] = useSearchParams()
 
@@ -205,11 +206,42 @@ export function PetInfo() {
 
   async function handleContactSubmit() {
     console.log('tentando enviar o email a partir do remetente: ', email)
+
+    toast('Entrando em contato com o dono...', {
+      position: "bottom-right",
+      autoClose: 3500,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      onClose: () => {
+
+        //atualizar usuario logado
+        setEmail('')
+      }
+    })
+
   }
 
   return (
 
     <div className="flex flex-col w-full min-h-screen bg-muted/40" >
+
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+      <ToastContainer />
 
 
 
